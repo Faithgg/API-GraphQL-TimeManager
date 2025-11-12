@@ -1,0 +1,7 @@
+node_modules/
+.env
+/generated
+firebase_service_account.json
+prisma/migrations/
+.scannerwork/
+coverage/

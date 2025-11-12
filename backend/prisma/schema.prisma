@@ -1,0 +1,93 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-arm64-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model business {
+  id                         String   @id @default(uuid())
+  name                       String
+  description                String?
+  normal_employee_start_time String? @default("09:00:00")
+  created_at                 DateTime? @default(now())
+  update_at                  DateTime?
+
+  users   users[]
+  teams   teams[]
+}
+
+model users {
+  id          String   @id @default(uuid())
+  business_id String?
+  google_id   String?
+  first_name  String?
+  last_name   String?
+  email       String
+  phone_number String?
+  kind        Kind
+  created_at  DateTime? @default(now())
+  updated_at  DateTime?
+
+  business business? @relation(fields: [business_id], references: [id])
+  teams    teams[]   @relation("ManagerTeams")
+  clocks   clocks[]
+  team_members team_members[] @relation("UserTeamMembers")
+}
+
+enum Kind {
+  employee
+  manager
+  business
+  user
+}
+
+model teams {
+  id          String   @id @default(uuid())
+  name                       String
+  description String?
+  business_id String
+  manager_id  String
+  created_at  DateTime? @default(now())
+  update_at   DateTime?
+
+  manager users? @relation("ManagerTeams", fields: [manager_id], references: [id])
+  business business? @relation(fields: [business_id], references: [id])
+  team_members team_members[]
+}
+
+model clocks {
+  id          String   @id @default(uuid())
+  date        DateTime?
+  start       DateTime?
+  end         DateTime?
+  employee_id String
+  status      ClockStatus?
+
+  employee users? @relation(fields: [employee_id], references: [id])
+}
+
+enum ClockStatus {
+  on_time
+  late
+  absent
+}
+
+model team_members {
+  id        String   @id @default(uuid())
+  team_id   String
+  member_id String
+  joined_at DateTime? @default(now())
+
+  team   teams? @relation(fields: [team_id], references: [id])
+  member users? @relation("UserTeamMembers", fields: [member_id], references: [id])
+}

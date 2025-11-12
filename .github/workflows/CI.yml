@@ -1,0 +1,123 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  test-services:
+    runs-on: ubuntu-latest
+    container:
+      image: node:20
+
+    services:
+    
+      sonarqube:
+        image: sonarqube:latest
+        ports:
+          - 9000:9000
+        options: >-
+          --health-cmd="curl --fail http://localhost:9000 || exit 1"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=10
+
+      db:
+        image: postgres:15
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: mydb
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U postgres"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      FIREBASE_SERVICE_ACCOUNT_JSON_BASE64: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON_BASE64 }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: ./backend
+
+      - name: Restore Firebase service account
+        run: |
+          echo "$FIREBASE_SERVICE_ACCOUNT_JSON_BASE64" | base64 -d > ./backend/firebase_service_account.json
+
+      - name: Create .env file
+        run: |
+          echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env
+          echo "PORT=${{ secrets.BACKEND_PORT }}" >> .env
+          echo "FIREBASE_SERVICE_ACCOUNT_PATH=./firebase_service_account.json" >> .env
+          echo "FIREBASE_API_KEY=${{ secrets.FIREBASE_API_KEY }}" >> .env
+          echo "FIREBASE_API_URL=${{ secrets.FIREBASE_API_URL }}" >> .env
+          echo "SUPER_ADMIN_EMAIL=${{ secrets.SUPER_ADMIN_EMAIL }}" >> .env
+        working-directory: ./backend
+
+      - name: Generate Prisma client
+        run: npx prisma generate
+        working-directory: ./backend
+
+      - name: Wait for Postgres to be ready
+        run: |
+          echo "⏳ Waiting for Postgres..."
+          for i in {1..25}; do
+            nc -z db 5432 && echo "✅ Database is up!" && break
+            echo "Still waiting..."
+            sleep 2
+          done
+
+      - name: Run migrations
+        run: npx prisma migrate dev --name init --preview-feature && npx prisma migrate deploy 
+        working-directory: ./backend
+
+      - name: Run Seeds
+        run: npm run seed
+        working-directory: ./backend
+
+      - name: Start backend server
+        run: |
+          # Lancer le serveur en arrière-plan
+          npm start &
+          
+          echo "🕐 Attente du démarrage du backend..."
+          sleep 15
+
+          # Vérifier la réponse d'une requête GraphQL
+          RESPONSE_CODE=$(curl -s -o response.json -w "%{http_code}" \
+            -X POST http://localhost:${{ secrets.BACKEND_PORT }}/graphql \
+            -H "Content-Type: application/json" \
+            -d '{"query": "{ me { id email } }"}')
+
+          echo "Response code: $RESPONSE_CODE"
+          cat response.json
+
+          # Lancer les tests après que tout soit prêt
+          echo "🚀 Lancement des tests..."
+          npm test  -- --runInBand 
+
+          # npx sonar-scanner \
+          #   -Dsonar.projectKey=Time-Manager \
+          #   -Dsonar.sources=. \
+          #   -Dsonar.host.url=http://localhost:9000 \
+          #   -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+
+          if [ "$RESPONSE_CODE" -ne 401 ]; then
+            echo "❌ Expected 401 but got $RESPONSE_CODE"
+            exit 1
+          fi
+
+        working-directory: ./backend

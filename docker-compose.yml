@@ -1,0 +1,77 @@
+
+version: "3.9"
+
+services:
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=mydb
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    command: >
+      postgres
+      -c shared_buffers=64MB
+      -c max_connections=20
+      -c effective_cache_size=128MB
+
+  db_sonar:
+      image: postgres:15
+      container_name: db_sonar
+      environment:
+        POSTGRES_USER: sonar
+        POSTGRES_PASSWORD: sonar
+        POSTGRES_DB: sonarqube
+      volumes:
+        - db_sonar_data:/var/lib/postgresql/data
+        
+  backend:
+      build:
+        context: ./backend
+        dockerfile: Dockerfile
+      container_name: backend
+      ports:
+        - "4001:4001"
+      env_file:
+        - ./backend/.env
+      depends_on:
+        - db
+        
+
+  sonarqube:
+    image: sonarqube:lts-community
+    container_name: sonarqube
+    ports:
+      - "9000:9000"
+    environment:
+      SONAR_ES_BOOTSTRAP_CHECKS_DISABLE: "true"
+    volumes:
+      - sonarqube_data:/opt/sonarqube/data
+      - sonarqube_extensions:/opt/sonarqube/extensions
+      - sonarqube_logs:/opt/sonarqube/logs
+    depends_on:
+      - db_sonar
+
+  adminer:
+      image: adminer
+      ports:
+        - "8180:8080"
+      environment:
+        - ADMINER_DESIGN_DB=mydb
+        - ADMINER_DEFAULT_SYSTEM=pgsql
+        - ADMINER_DESIGN_USER=postgres
+        - ADMINER_DESIGN_PASSWORD=postgres
+
+volumes:
+  db_data:
+  sonarqube_data:
+  sonarqube_extensions:
+  sonarqube_logs:
+  db_sonar_data:
