@@ -65,6 +65,29 @@ cd backend
 npm test
 ```
 
+### Autres
+
+#### Collection Postman
+
+Le fichier `Time Manager.postman_collection.json` est disponible à la racine du projet. Il s'agit d'une exportation de la collection Postman regroupant l'ensemble des appels API (requêtes et mutations GraphQL) proposés par le backend.
+
+Tu peux l'importer directement dans Postman pour :
+- explorer rapidement les endpoints disponibles,
+- tester les différentes opérations avec des jeux d'exemples prêts à l'emploi,
+- et voir la structure attendue pour chaque requête.
+
+**Utilisation rapide :**
+1. Ouvre Postman.
+2. Clique sur `Importer` et sélectionne le fichier `Time Manager.postman_collection.json`.
+3. Adapte, si besoin, l'URL et les headers avec tes propres variables d'environnement (ex : bearer token).
+
+La collection couvre notamment :
+- la création de business,
+- la gestion des membres et utilisateurs,
+- l'authentification,
+- et d'autres opérations essentielles de Time Manager.
+
+
 ---
 
 Retrouve toutes les informations de connexion, exemples de requêtes et guides d’utilisation dans la documentation interne ou via le playground GraphQL.

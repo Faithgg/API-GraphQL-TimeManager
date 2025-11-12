@@ -1,0 +1,947 @@
+{
+	"info": {
+		"_postman_id": "3183ae42-2784-4a7b-bf5a-0d775426e8ee",
+		"name": "Time Manager",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31033538",
+		"_collection_link": "https://jzdczjh.postman.co/workspace/tests~dede28f8-5b6c-4ea3-993f-6fffd0382adc/collection/31033538-3183ae42-2784-4a7b-bf5a-0d775426e8ee?action=share&source=collection_link&creator=31033538"
+	},
+	"item": [
+		{
+			"name": "Créer un business",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjdlYTA5ZDA1NzI2MmU2M2U2MmZmNzNmMDNlMDRhZDI5ZDg5Zjg5MmEiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiRmFpdGhnb3QiLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTF4NmNmdnZWdEsxQTNLOUhBVDF5ekZkSjZOa1BuSE9QS0pYR3N6cEVoRVBYYWlRPXM5Ni1jIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL3RpbWUtbWFuYWdlci1jZTg1MyIsImF1ZCI6InRpbWUtbWFuYWdlci1jZTg1MyIsImF1dGhfdGltZSI6MTc2MTY0MDczNiwidXNlcl9pZCI6IlpnVExqaWo3TWFlN2dUN2lrb0luWHBWRVNUWTIiLCJzdWIiOiJaZ1RMamlqN01hZTdnVDdpa29JblhwVkVTVFkyIiwiaWF0IjoxNzYxNjQwNzM2LCJleHAiOjE3NjE2NDQzMzYsImVtYWlsIjoiZmFpdGhnb3QudGVjaEBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJnb29nbGUuY29tIjpbIjExMDU4NjI5ODg5MzgzMTg3MTAwMCJdLCJlbWFpbCI6WyJmYWl0aGdvdC50ZWNoQGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6Imdvb2dsZS5jb20ifX0.DWizBsEicsZ15-hefiIOT-4E_7m5iWLt4Q7ahrfs6QMTJJ6Hf6fpe63FIDs_dQxmi_zKIb-zNfPO5uYDBr6PETKwz6Qmkt9dsJPgipU2sArrwaUXUGGutgmxytxgHAftiBfOOHmOjNEwo2A-1dcfoA_E47s9pW45cdDRGJOysnBynD8nUFmxq_9y4QONHKVckRaIuLZybhmC35g-BiH80IJUIt_QzAjZ4QHmPxX0oKprGDuB6oYg6rtl7xzb0kOdvKM6awFNDlwvwqbhgqwEYcH6JfxnuWA6GNV6i_U8iY4OkIqSK3UgJZQnXCiArxUoEtvnvL3ahi3PEhlidS1BGQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation CreateBusiness($name: String!, $description: String, $normal_employee_start_time: String) {\n  createBusiness(\n    name: $name\n    description: $description\n    normal_employee_start_time: $normal_employee_start_time\n  ) {\n    id\n    name\n    description\n    normal_employee_start_time\n    created_at\n  }\n}",
+						"variables": "{\n  \"name\": \"AREGO\",\n  \"description\" : \"Société de création d'engins spaciaux\",\n  \"normal_employee_start_time\": \"09:00:00\"\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4001/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Récupérer un business par ID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjdlYTA5ZDA1NzI2MmU2M2U2MmZmNzNmMDNlMDRhZDI5ZDg5Zjg5MmEiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiRmFpdGhnb3QiLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTF4NmNmdnZWdEsxQTNLOUhBVDF5ekZkSjZOa1BuSE9QS0pYR3N6cEVoRVBYYWlRPXM5Ni1jIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL3RpbWUtbWFuYWdlci1jZTg1MyIsImF1ZCI6InRpbWUtbWFuYWdlci1jZTg1MyIsImF1dGhfdGltZSI6MTc2MTY0MDczNiwidXNlcl9pZCI6IlpnVExqaWo3TWFlN2dUN2lrb0luWHBWRVNUWTIiLCJzdWIiOiJaZ1RMamlqN01hZTdnVDdpa29JblhwVkVTVFkyIiwiaWF0IjoxNzYxNjQwNzM2LCJleHAiOjE3NjE2NDQzMzYsImVtYWlsIjoiZmFpdGhnb3QudGVjaEBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJnb29nbGUuY29tIjpbIjExMDU4NjI5ODg5MzgzMTg3MTAwMCJdLCJlbWFpbCI6WyJmYWl0aGdvdC50ZWNoQGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6Imdvb2dsZS5jb20ifX0.DWizBsEicsZ15-hefiIOT-4E_7m5iWLt4Q7ahrfs6QMTJJ6Hf6fpe63FIDs_dQxmi_zKIb-zNfPO5uYDBr6PETKwz6Qmkt9dsJPgipU2sArrwaUXUGGutgmxytxgHAftiBfOOHmOjNEwo2A-1dcfoA_E47s9pW45cdDRGJOysnBynD8nUFmxq_9y4QONHKVckRaIuLZybhmC35g-BiH80IJUIt_QzAjZ4QHmPxX0oKprGDuB6oYg6rtl7xzb0kOdvKM6awFNDlwvwqbhgqwEYcH6JfxnuWA6GNV6i_U8iY4OkIqSK3UgJZQnXCiArxUoEtvnvL3ahi3PEhlidS1BGQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query business ($business_id: ID!) {\n      business(id: $business_id) {\n      id\n      name\n      description\n      normal_employee_start_time\n      }\n    }",
+						"variables": "{\n  \"business_id\": \"3530e9ab-431f-495c-b308-47956caf6be3\"\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4001/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Récupérer tous les business",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjdlYTA5ZDA1NzI2MmU2M2U2MmZmNzNmMDNlMDRhZDI5ZDg5Zjg5MmEiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiRmFpdGhnb3QiLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTF4NmNmdnZWdEsxQTNLOUhBVDF5ekZkSjZOa1BuSE9QS0pYR3N6cEVoRVBYYWlRPXM5Ni1jIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL3RpbWUtbWFuYWdlci1jZTg1MyIsImF1ZCI6InRpbWUtbWFuYWdlci1jZTg1MyIsImF1dGhfdGltZSI6MTc2MTY0MDczNiwidXNlcl9pZCI6IlpnVExqaWo3TWFlN2dUN2lrb0luWHBWRVNUWTIiLCJzdWIiOiJaZ1RMamlqN01hZTdnVDdpa29JblhwVkVTVFkyIiwiaWF0IjoxNzYxNjQwNzM2LCJleHAiOjE3NjE2NDQzMzYsImVtYWlsIjoiZmFpdGhnb3QudGVjaEBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJnb29nbGUuY29tIjpbIjExMDU4NjI5ODg5MzgzMTg3MTAwMCJdLCJlbWFpbCI6WyJmYWl0aGdvdC50ZWNoQGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6Imdvb2dsZS5jb20ifX0.DWizBsEicsZ15-hefiIOT-4E_7m5iWLt4Q7ahrfs6QMTJJ6Hf6fpe63FIDs_dQxmi_zKIb-zNfPO5uYDBr6PETKwz6Qmkt9dsJPgipU2sArrwaUXUGGutgmxytxgHAftiBfOOHmOjNEwo2A-1dcfoA_E47s9pW45cdDRGJOysnBynD8nUFmxq_9y4QONHKVckRaIuLZybhmC35g-BiH80IJUIt_QzAjZ4QHmPxX0oKprGDuB6oYg6rtl7xzb0kOdvKM6awFNDlwvwqbhgqwEYcH6JfxnuWA6GNV6i_U8iY4OkIqSK3UgJZQnXCiArxUoEtvnvL3ahi3PEhlidS1BGQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query {\n        businesses {\n        id\n        name\n        description\n        normal_employee_start_time\n      }\n    }",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4001/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modifier un business",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjdlYTA5ZDA1NzI2MmU2M2U2MmZmNzNmMDNlMDRhZDI5ZDg5Zjg5MmEiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiRmFpdGhnb3QiLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTF4NmNmdnZWdEsxQTNLOUhBVDF5ekZkSjZOa1BuSE9QS0pYR3N6cEVoRVBYYWlRPXM5Ni1jIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL3RpbWUtbWFuYWdlci1jZTg1MyIsImF1ZCI6InRpbWUtbWFuYWdlci1jZTg1MyIsImF1dGhfdGltZSI6MTc2MTY0MDczNiwidXNlcl9pZCI6IlpnVExqaWo3TWFlN2dUN2lrb0luWHBWRVNUWTIiLCJzdWIiOiJaZ1RMamlqN01hZTdnVDdpa29JblhwVkVTVFkyIiwiaWF0IjoxNzYxNjQwNzM2LCJleHAiOjE3NjE2NDQzMzYsImVtYWlsIjoiZmFpdGhnb3QudGVjaEBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJnb29nbGUuY29tIjpbIjExMDU4NjI5ODg5MzgzMTg3MTAwMCJdLCJlbWFpbCI6WyJmYWl0aGdvdC50ZWNoQGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6Imdvb2dsZS5jb20ifX0.DWizBsEicsZ15-hefiIOT-4E_7m5iWLt4Q7ahrfs6QMTJJ6Hf6fpe63FIDs_dQxmi_zKIb-zNfPO5uYDBr6PETKwz6Qmkt9dsJPgipU2sArrwaUXUGGutgmxytxgHAftiBfOOHmOjNEwo2A-1dcfoA_E47s9pW45cdDRGJOysnBynD8nUFmxq_9y4QONHKVckRaIuLZybhmC35g-BiH80IJUIt_QzAjZ4QHmPxX0oKprGDuB6oYg6rtl7xzb0kOdvKM6awFNDlwvwqbhgqwEYcH6JfxnuWA6GNV6i_U8iY4OkIqSK3UgJZQnXCiArxUoEtvnvL3ahi3PEhlidS1BGQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation updateBusiness ($business_id:ID!, $business_name:String, $business_description:String,$business_normal_employee_start_time:String ) {\n      updateBusiness(\n        id: $business_id,\n        name: $business_name,\n        description: $business_description,\n        normal_employee_start_time: $business_normal_employee_start_time\n      ) {\n        id\n        name\n        description\n        normal_employee_start_time\n      }\n    }",
+						"variables": "{\n  \"business_id\": \"3530e9ab-431f-495c-b308-47956caf6be3\",\n  \"business_name\":\"Updated Business Name\",\n  \"business_description\":\"Updated Description\",\n  \"business_normal_employee_start_time\":\"08:00:00\"\n\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4001/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Supprimer un business",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjdlYTA5ZDA1NzI2MmU2M2U2MmZmNzNmMDNlMDRhZDI5ZDg5Zjg5MmEiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiRmFpdGhnb3QiLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTF4NmNmdnZWdEsxQTNLOUhBVDF5ekZkSjZOa1BuSE9QS0pYR3N6cEVoRVBYYWlRPXM5Ni1jIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL3RpbWUtbWFuYWdlci1jZTg1MyIsImF1ZCI6InRpbWUtbWFuYWdlci1jZTg1MyIsImF1dGhfdGltZSI6MTc2MTY0MjI4NCwidXNlcl9pZCI6IlpnVExqaWo3TWFlN2dUN2lrb0luWHBWRVNUWTIiLCJzdWIiOiJaZ1RMamlqN01hZTdnVDdpa29JblhwVkVTVFkyIiwiaWF0IjoxNzYxNjQyMjg0LCJleHAiOjE3NjE2NDU4ODQsImVtYWlsIjoiZmFpdGhnb3QudGVjaEBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJnb29nbGUuY29tIjpbIjExMDU4NjI5ODg5MzgzMTg3MTAwMCJdLCJlbWFpbCI6WyJmYWl0aGdvdC50ZWNoQGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6Imdvb2dsZS5jb20ifX0.0i-L6eTqCtO_c5NvDo6-w7DzBkzIuVsQ5Dh-WjqrVB-WCY_-CcNL9diz-pnrHcYwvCtif71JcbzBe4khVqcrpKMN_R6z-3M8gn7jBjH-mzDJfXVQCvsjsJjl45iLLhvYdJHJXC2Ih88u1D5IFkhOUudE8-9DB4HcQbhAFfS_cgMg9ViDI8a8_1jyWeoIeJnNgJTN0o2LkD0MrEHU6biA9NfedF-vHzFAVJm0Y43F1vvTdosxRy_u0UyqoGVKxXdBYBO-UIfkzHdLlePKvEpZMhzy7r2B7_mGLZtIMa8Iunn60HudlZN-82WoB7NhORtpYW3TCeNg8CO15m7QCdMZCg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation deleteBusiness($business_id: ID!) {\n    deleteBusiness (id:$business_id) \n  }",
+						"variables": "{\n    \"business_id\": \"41c0bc6c-c7d8-4547-8a04-7630751d1b4b\"\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4001/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Creer un utilisateur",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImE1YTAwNWU5N2NiMWU0MjczMDBlNTJjZGQ1MGYwYjM2Y2Q4MDYyOWIiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiRmFpdGhnb3QiLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTF4NmNmdnZWdEsxQTNLOUhBVDF5ekZkSjZOa1BuSE9QS0pYR3N6cEVoRVBYYWlRPXM5Ni1jIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL3RpbWUtbWFuYWdlci1jZTg1MyIsImF1ZCI6InRpbWUtbWFuYWdlci1jZTg1MyIsImF1dGhfdGltZSI6MTc2MDM1MzYzMiwidXNlcl9pZCI6IlpnVExqaWo3TWFlN2dUN2lrb0luWHBWRVNUWTIiLCJzdWIiOiJaZ1RMamlqN01hZTdnVDdpa29JblhwVkVTVFkyIiwiaWF0IjoxNzYwMzUzNjMyLCJleHAiOjE3NjAzNTcyMzIsImVtYWlsIjoiZmFpdGhnb3QudGVjaEBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJnb29nbGUuY29tIjpbIjExMDU4NjI5ODg5MzgzMTg3MTAwMCJdLCJlbWFpbCI6WyJmYWl0aGdvdC50ZWNoQGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6Imdvb2dsZS5jb20ifX0.gv6ZczRfs9l9CFt6pWHCVVbJnBkOZNmq8RLLuYz5ObZEzwCigNLHRMZCIfCemkL89jzp8IvMd5uK4shcfrMlCvAs8slnM3c5sc3s5L52zgqulz0SBkMacrZCgLPvR_a2BwNhv9hsbta8Xzf5dlhhpIRH6n_KNVVFD0a4vkbQJa6H3eHeD8Y-a7jeobcBDwtq63XPsvjVYeYd7YW7txoRyxzkLvo-nqRdaJQ13XvbkwXUOSMWrXhM-S85vaJGpZ4I5pkQiRPIHCxv9bwxxnvUEK6lNf-tpjZgiltxWiQzwQTjgabSy-lkBiYuNYhx_4M_iZAW5y1f8YfVknQhGNALKA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation createUser ($email: String!, $first_name: String, $last_name: String,$phone_number:String, $kind:Kind!) {\n    createUser (email:$email, first_name:$first_name, last_name:$last_name,phone_number:$phone_number, kind:$kind) {\n    id\n    email\n    first_name\n    last_name\n    phone_number\n    kind\n    }\n  }",
+						"variables": "{\n    \"email\": \"Équipe 3244 Test\",      \n    \"first_name\": \"Équipe créée pour les tests\",\n    \"last_name\":\"bfe01ab3-e20d-470b-9289-c26e563ab145\",\n    \"phone_number\": \"440f50e8-ce61-42e5-814c-ea38685933ff\",\n     \"kind\"  :\"user\"\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4001/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modifier un utilisateur",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjdlYTA5ZDA1NzI2MmU2M2U2MmZmNzNmMDNlMDRhZDI5ZDg5Zjg5MmEiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiRmFpdGhnb3QiLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTF4NmNmdnZWdEsxQTNLOUhBVDF5ekZkSjZOa1BuSE9QS0pYR3N6cEVoRVBYYWlRPXM5Ni1jIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL3RpbWUtbWFuYWdlci1jZTg1MyIsImF1ZCI6InRpbWUtbWFuYWdlci1jZTg1MyIsImF1dGhfdGltZSI6MTc2MTY1NjM2MSwidXNlcl9pZCI6IlpnVExqaWo3TWFlN2dUN2lrb0luWHBWRVNUWTIiLCJzdWIiOiJaZ1RMamlqN01hZTdnVDdpa29JblhwVkVTVFkyIiwiaWF0IjoxNzYxNjU2MzYxLCJleHAiOjE3NjE2NTk5NjEsImVtYWlsIjoiZmFpdGhnb3QudGVjaEBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJnb29nbGUuY29tIjpbIjExMDU4NjI5ODg5MzgzMTg3MTAwMCJdLCJlbWFpbCI6WyJmYWl0aGdvdC50ZWNoQGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6Imdvb2dsZS5jb20ifX0.YpeqSn-jrkdYzTNgIDoh4SI_Ng22tRv7yJGHwC-gr_0Dx9wBvTlqAXu1-aRmEtbVBucfOgNS-UR-ngos1JIZ__F0FJdSL3OzQzCAcaIWbjVimQq8lOw-rGIaHR_fYSCBiVLM_kO8ZYAU4H1XjXrFywDqiBbERiYR6KGkmoy75LZvF-YbSi7Whukfjnmtg-H-30eej22C463kRBJbuxV4QkHkZgbROirLuNqcSdgcPteWi5H6-eErTDu5Lmt__OB-D1YCwXlgX1VbxjFmSBKLsou0ENDQoXHIYVEPV_nTNL76f8r86b3dduWWpgPQ_uMNKTn6Co5fZo_sh9jBNLRyyg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation updateUser ($user_id:ID!,$email: String, $first_name: String, $last_name: String,$phone_number:String, $kind:Kind!) {\n    updateUser (id:$user_id,email:$email, first_name:$first_name, last_name:$last_name,phone_number:$phone_number, kind:$kind) {\n    id\n    email\n    first_name\n    last_name\n    phone_number\n    kind\n    }\n  }",
+						"variables": "{\n    \"user_id\":\"54407273-eed4-4e5b-bceb-e2e6f733ae87\",\n    \"email\": \"faithgot.tech@gmail.com\",      \n    \"first_name\": \"Faith\",\n    \"last_name\":\"Last\",\n    \"phone_number\": \"1234578690\",\n     \"kind\"  :\"business\"\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4001/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Récupérer un utilisateur par ID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImE1YTAwNWU5N2NiMWU0MjczMDBlNTJjZGQ1MGYwYjM2Y2Q4MDYyOWIiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiZmFpdGhnb3QgbGV0b25zb3UgR0xJTi1EQVlJIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FDZzhvY0tqMDB2LXFYdENVSUZuNUl3amhsb1FWTHRyTWw2ZkJ2SE1KUTZxSi1kaDlWNDhRdz1zOTYtYyIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS90aW1lLW1hbmFnZXItY2U4NTMiLCJhdWQiOiJ0aW1lLW1hbmFnZXItY2U4NTMiLCJhdXRoX3RpbWUiOjE3NjAzNjc2NTIsInVzZXJfaWQiOiJoTjZLT2pWWnFSUFNWd0c0MWdpWmtFcXNvTHUxIiwic3ViIjoiaE42S09qVlpxUlBTVndHNDFnaVprRXFzb0x1MSIsImlhdCI6MTc2MDM2NzY1MiwiZXhwIjoxNzYwMzcxMjUyLCJlbWFpbCI6ImZhaXRobGV0b25zb3VAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZ29vZ2xlLmNvbSI6WyIxMTQ1NDE0OTMzNzI3MDQ0MzY3NDEiXSwiZW1haWwiOlsiZmFpdGhsZXRvbnNvdUBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJnb29nbGUuY29tIn19.e_-3TKvQDA_s0w3GQjCanAPTV8mH6EDLtoC4AdCklMNhzdRYNSgwDGnecDBnRU0wX6evAzDnuMwm2tM6DQEeCeeBvlPLHjl58q98YEXuJA0RkxsXNJSot9mZnWA5MK24j00RL75oAKr7vLdIRwccfC725i7M7ByWCl3ez4fzAdxtXNfjGuWFQB4EtnejPraT5nn-0XZudF7KCE7sTha67JOw4NKlk0MKQ01LmMZL4g_jsVkYDBXNZ9-nEVXtx4qiaKAmMCtM3I4i3YwVEOAdm-hgKISH6g8ikDzr5YM9cNRV_7feEVGuxsXTm8t7Xm0qdo4bN3MjD7THMe9i8h1UrA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query user($user_id:ID!) {\n        user(id: $user_id) {\n          id\n          email\n          first_name\n          last_name\n          phone_number\n          kind\n        }\n      }",
+						"variables": "{\n    \"user_id\":\"54407273-eed4-4e5b-bceb-e2e6f733ae87\"\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4001/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Me (Récupérer l'utilisateur actuel)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjdlYTA5ZDA1NzI2MmU2M2U2MmZmNzNmMDNlMDRhZDI5ZDg5Zjg5MmEiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiRmFpdGhnb3QiLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTF4NmNmdnZWdEsxQTNLOUhBVDF5ekZkSjZOa1BuSE9QS0pYR3N6cEVoRVBYYWlRPXM5Ni1jIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL3RpbWUtbWFuYWdlci1jZTg1MyIsImF1ZCI6InRpbWUtbWFuYWdlci1jZTg1MyIsImF1dGhfdGltZSI6MTc2MTU5NjMwNSwidXNlcl9pZCI6IlpnVExqaWo3TWFlN2dUN2lrb0luWHBWRVNUWTIiLCJzdWIiOiJaZ1RMamlqN01hZTdnVDdpa29JblhwVkVTVFkyIiwiaWF0IjoxNzYxNTk2MzA1LCJleHAiOjE3NjE1OTk5MDUsImVtYWlsIjoiZmFpdGhnb3QudGVjaEBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJnb29nbGUuY29tIjpbIjExMDU4NjI5ODg5MzgzMTg3MTAwMCJdLCJlbWFpbCI6WyJmYWl0aGdvdC50ZWNoQGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6Imdvb2dsZS5jb20ifX0.03ygMmFJJAAqn1nc4zCVm0v3t6H7mDqqcdWglYxUy4yBJOeqauAcBSY3jyaTr35EOUjoDT_3hXxS6EV68j8fdiZXblrDTx8rPc8w7bUjgul6T7GaMDAEEIPlJOR7qaiMTw6iapRl_IqXllmV-JQax4Me3XARS0Fprb21fpJw06pv56eyPE82qhofh6Ddj5I7ewfCavR7yJd7TcWLs5UrkJAXf79phbilvDjRd-4N_Zcvv0B7w7p1d-yrD7AxshNmuw_pW2HbOqaHCApCmEW0IkwwrzF-Kz1NRQAQFIGiSaabrhT3AA0_T8h6KhQP-yWS5ZvkHJU3TJjmz3kqY57a2g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query{\n  me {\n    business_id,first_name,last_name, business_id,id,google_id,created_at,updated_at,kind\n  }\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4001/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Récupérer tous les utilisateurs",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImE1YTAwNWU5N2NiMWU0MjczMDBlNTJjZGQ1MGYwYjM2Y2Q4MDYyOWIiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiRmFpdGhnb3QiLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTF4NmNmdnZWdEsxQTNLOUhBVDF5ekZkSjZOa1BuSE9QS0pYR3N6cEVoRVBYYWlRPXM5Ni1jIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL3RpbWUtbWFuYWdlci1jZTg1MyIsImF1ZCI6InRpbWUtbWFuYWdlci1jZTg1MyIsImF1dGhfdGltZSI6MTc2MDM1MzYzMiwidXNlcl9pZCI6IlpnVExqaWo3TWFlN2dUN2lrb0luWHBWRVNUWTIiLCJzdWIiOiJaZ1RMamlqN01hZTdnVDdpa29JblhwVkVTVFkyIiwiaWF0IjoxNzYwMzUzNjMyLCJleHAiOjE3NjAzNTcyMzIsImVtYWlsIjoiZmFpdGhnb3QudGVjaEBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJnb29nbGUuY29tIjpbIjExMDU4NjI5ODg5MzgzMTg3MTAwMCJdLCJlbWFpbCI6WyJmYWl0aGdvdC50ZWNoQGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6Imdvb2dsZS5jb20ifX0.gv6ZczRfs9l9CFt6pWHCVVbJnBkOZNmq8RLLuYz5ObZEzwCigNLHRMZCIfCemkL89jzp8IvMd5uK4shcfrMlCvAs8slnM3c5sc3s5L52zgqulz0SBkMacrZCgLPvR_a2BwNhv9hsbta8Xzf5dlhhpIRH6n_KNVVFD0a4vkbQJa6H3eHeD8Y-a7jeobcBDwtq63XPsvjVYeYd7YW7txoRyxzkLvo-nqRdaJQ13XvbkwXUOSMWrXhM-S85vaJGpZ4I5pkQiRPIHCxv9bwxxnvUEK6lNf-tpjZgiltxWiQzwQTjgabSy-lkBiYuNYhx_4M_iZAW5y1f8YfVknQhGNALKA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query {\n        users {\n          id\n          email\n          first_name\n          last_name\n          phone_number\n          kind\n        }\n      }",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4001/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ajouter un membre au Business",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjdlYTA5ZDA1NzI2MmU2M2U2MmZmNzNmMDNlMDRhZDI5ZDg5Zjg5MmEiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiRmFpdGhnb3QiLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTF4NmNmdnZWdEsxQTNLOUhBVDF5ekZkSjZOa1BuSE9QS0pYR3N6cEVoRVBYYWlRPXM5Ni1jIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL3RpbWUtbWFuYWdlci1jZTg1MyIsImF1ZCI6InRpbWUtbWFuYWdlci1jZTg1MyIsImF1dGhfdGltZSI6MTc2MTY1NjM2MSwidXNlcl9pZCI6IlpnVExqaWo3TWFlN2dUN2lrb0luWHBWRVNUWTIiLCJzdWIiOiJaZ1RMamlqN01hZTdnVDdpa29JblhwVkVTVFkyIiwiaWF0IjoxNzYxNjU2MzYxLCJleHAiOjE3NjE2NTk5NjEsImVtYWlsIjoiZmFpdGhnb3QudGVjaEBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJnb29nbGUuY29tIjpbIjExMDU4NjI5ODg5MzgzMTg3MTAwMCJdLCJlbWFpbCI6WyJmYWl0aGdvdC50ZWNoQGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6Imdvb2dsZS5jb20ifX0.YpeqSn-jrkdYzTNgIDoh4SI_Ng22tRv7yJGHwC-gr_0Dx9wBvTlqAXu1-aRmEtbVBucfOgNS-UR-ngos1JIZ__F0FJdSL3OzQzCAcaIWbjVimQq8lOw-rGIaHR_fYSCBiVLM_kO8ZYAU4H1XjXrFywDqiBbERiYR6KGkmoy75LZvF-YbSi7Whukfjnmtg-H-30eej22C463kRBJbuxV4QkHkZgbROirLuNqcSdgcPteWi5H6-eErTDu5Lmt__OB-D1YCwXlgX1VbxjFmSBKLsou0ENDQoXHIYVEPV_nTNL76f8r86b3dduWWpgPQ_uMNKTn6Co5fZo_sh9jBNLRyyg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation addMemberToBusiness ($userEmail: String!, $businessId : String!) {\n    addMemberToBusiness (userEmail: $userEmail , businessId: $businessId) {\n        id,email,business_id,first_name,last_name\n    }\n}",
+						"variables": "{\n    \"userEmail\" : \"newmember9268@example.com\",\n    \"businessId\":\"3530e9ab-431f-495c-b308-47956caf6be3\"\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4001/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Supprimer un membre du Business",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjdlYTA5ZDA1NzI2MmU2M2U2MmZmNzNmMDNlMDRhZDI5ZDg5Zjg5MmEiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiRmFpdGhnb3QiLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTF4NmNmdnZWdEsxQTNLOUhBVDF5ekZkSjZOa1BuSE9QS0pYR3N6cEVoRVBYYWlRPXM5Ni1jIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL3RpbWUtbWFuYWdlci1jZTg1MyIsImF1ZCI6InRpbWUtbWFuYWdlci1jZTg1MyIsImF1dGhfdGltZSI6MTc2MTY1NjM2MSwidXNlcl9pZCI6IlpnVExqaWo3TWFlN2dUN2lrb0luWHBWRVNUWTIiLCJzdWIiOiJaZ1RMamlqN01hZTdnVDdpa29JblhwVkVTVFkyIiwiaWF0IjoxNzYxNjU2MzYxLCJleHAiOjE3NjE2NTk5NjEsImVtYWlsIjoiZmFpdGhnb3QudGVjaEBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJnb29nbGUuY29tIjpbIjExMDU4NjI5ODg5MzgzMTg3MTAwMCJdLCJlbWFpbCI6WyJmYWl0aGdvdC50ZWNoQGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6Imdvb2dsZS5jb20ifX0.YpeqSn-jrkdYzTNgIDoh4SI_Ng22tRv7yJGHwC-gr_0Dx9wBvTlqAXu1-aRmEtbVBucfOgNS-UR-ngos1JIZ__F0FJdSL3OzQzCAcaIWbjVimQq8lOw-rGIaHR_fYSCBiVLM_kO8ZYAU4H1XjXrFywDqiBbERiYR6KGkmoy75LZvF-YbSi7Whukfjnmtg-H-30eej22C463kRBJbuxV4QkHkZgbROirLuNqcSdgcPteWi5H6-eErTDu5Lmt__OB-D1YCwXlgX1VbxjFmSBKLsou0ENDQoXHIYVEPV_nTNL76f8r86b3dduWWpgPQ_uMNKTn6Co5fZo_sh9jBNLRyyg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation removeMemberFromBusiness ($userEmail: String!, $businessId : String!) {\n    removeMemberFromBusiness (userEmail: $userEmail , businessId: $businessId){\n        id\n          email\n          first_name\n          last_name\n          phone_number\n          kind\n          business_id\n    }\n}",
+						"variables": "{\n    \"userEmail\" : \"newmember9268@example.com\",\n    \"businessId\":\"3530e9ab-431f-495c-b308-47956caf6be3\"\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4001/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Supprimer un utilisateur",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImE1YTAwNWU5N2NiMWU0MjczMDBlNTJjZGQ1MGYwYjM2Y2Q4MDYyOWIiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiZmFpdGhnb3QgbGV0b25zb3UgR0xJTi1EQVlJIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FDZzhvY0tqMDB2LXFYdENVSUZuNUl3amhsb1FWTHRyTWw2ZkJ2SE1KUTZxSi1kaDlWNDhRdz1zOTYtYyIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS90aW1lLW1hbmFnZXItY2U4NTMiLCJhdWQiOiJ0aW1lLW1hbmFnZXItY2U4NTMiLCJhdXRoX3RpbWUiOjE3NjAzNjc2NTIsInVzZXJfaWQiOiJoTjZLT2pWWnFSUFNWd0c0MWdpWmtFcXNvTHUxIiwic3ViIjoiaE42S09qVlpxUlBTVndHNDFnaVprRXFzb0x1MSIsImlhdCI6MTc2MDM2NzY1MiwiZXhwIjoxNzYwMzcxMjUyLCJlbWFpbCI6ImZhaXRobGV0b25zb3VAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZ29vZ2xlLmNvbSI6WyIxMTQ1NDE0OTMzNzI3MDQ0MzY3NDEiXSwiZW1haWwiOlsiZmFpdGhsZXRvbnNvdUBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJnb29nbGUuY29tIn19.e_-3TKvQDA_s0w3GQjCanAPTV8mH6EDLtoC4AdCklMNhzdRYNSgwDGnecDBnRU0wX6evAzDnuMwm2tM6DQEeCeeBvlPLHjl58q98YEXuJA0RkxsXNJSot9mZnWA5MK24j00RL75oAKr7vLdIRwccfC725i7M7ByWCl3ez4fzAdxtXNfjGuWFQB4EtnejPraT5nn-0XZudF7KCE7sTha67JOw4NKlk0MKQ01LmMZL4g_jsVkYDBXNZ9-nEVXtx4qiaKAmMCtM3I4i3YwVEOAdm-hgKISH6g8ikDzr5YM9cNRV_7feEVGuxsXTm8t7Xm0qdo4bN3MjD7THMe9i8h1UrA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation deleteUser($user_id:ID!) {\n        deleteUser(id: $user_id)\n      }",
+						"variables": "{\n    \"user_id\":\"fde8cf7e-39c0-4d6b-b269-11b64bee5623\"\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4001/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Créer une équipe",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjdlYTA5ZDA1NzI2MmU2M2U2MmZmNzNmMDNlMDRhZDI5ZDg5Zjg5MmEiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiRmFpdGhnb3QiLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTF4NmNmdnZWdEsxQTNLOUhBVDF5ekZkSjZOa1BuSE9QS0pYR3N6cEVoRVBYYWlRPXM5Ni1jIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL3RpbWUtbWFuYWdlci1jZTg1MyIsImF1ZCI6InRpbWUtbWFuYWdlci1jZTg1MyIsImF1dGhfdGltZSI6MTc2MTY0MDczNiwidXNlcl9pZCI6IlpnVExqaWo3TWFlN2dUN2lrb0luWHBWRVNUWTIiLCJzdWIiOiJaZ1RMamlqN01hZTdnVDdpa29JblhwVkVTVFkyIiwiaWF0IjoxNzYxNjQwNzM2LCJleHAiOjE3NjE2NDQzMzYsImVtYWlsIjoiZmFpdGhnb3QudGVjaEBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJnb29nbGUuY29tIjpbIjExMDU4NjI5ODg5MzgzMTg3MTAwMCJdLCJlbWFpbCI6WyJmYWl0aGdvdC50ZWNoQGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6Imdvb2dsZS5jb20ifX0.DWizBsEicsZ15-hefiIOT-4E_7m5iWLt4Q7ahrfs6QMTJJ6Hf6fpe63FIDs_dQxmi_zKIb-zNfPO5uYDBr6PETKwz6Qmkt9dsJPgipU2sArrwaUXUGGutgmxytxgHAftiBfOOHmOjNEwo2A-1dcfoA_E47s9pW45cdDRGJOysnBynD8nUFmxq_9y4QONHKVckRaIuLZybhmC35g-BiH80IJUIt_QzAjZ4QHmPxX0oKprGDuB6oYg6rtl7xzb0kOdvKM6awFNDlwvwqbhgqwEYcH6JfxnuWA6GNV6i_U8iY4OkIqSK3UgJZQnXCiArxUoEtvnvL3ahi3PEhlidS1BGQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation createTeam ($business_id: ID!, $name: String!, $manager_id: ID!) {\n    createTeam (business_id: $business_id, name: $name, manager_id: $manager_id) {\n    id,\n    name,\n    description,\n    business_id,\n    manager_id,\n    created_at,\n    update_at\n    \n    }\n  }",
+						"variables": "{\n    \"name\": \"Équipe 3244 Test\",      \n    \"description\": \"Équipe créée pour les tests\",\n    \"business_id\":\"bfe01ab3-e20d-470b-9289-c26e563ab145\",\n    \"manager_id\": \"440f50e8-ce61-42e5-814c-ea38685933ff\"    \n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4001/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Récupérer une équipe par ID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImE1YTAwNWU5N2NiMWU0MjczMDBlNTJjZGQ1MGYwYjM2Y2Q4MDYyOWIiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiRmFpdGhnb3QiLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTF4NmNmdnZWdEsxQTNLOUhBVDF5ekZkSjZOa1BuSE9QS0pYR3N6cEVoRVBYYWlRPXM5Ni1jIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL3RpbWUtbWFuYWdlci1jZTg1MyIsImF1ZCI6InRpbWUtbWFuYWdlci1jZTg1MyIsImF1dGhfdGltZSI6MTc2MDM1MzYzMiwidXNlcl9pZCI6IlpnVExqaWo3TWFlN2dUN2lrb0luWHBWRVNUWTIiLCJzdWIiOiJaZ1RMamlqN01hZTdnVDdpa29JblhwVkVTVFkyIiwiaWF0IjoxNzYwMzUzNjMyLCJleHAiOjE3NjAzNTcyMzIsImVtYWlsIjoiZmFpdGhnb3QudGVjaEBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJnb29nbGUuY29tIjpbIjExMDU4NjI5ODg5MzgzMTg3MTAwMCJdLCJlbWFpbCI6WyJmYWl0aGdvdC50ZWNoQGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6Imdvb2dsZS5jb20ifX0.gv6ZczRfs9l9CFt6pWHCVVbJnBkOZNmq8RLLuYz5ObZEzwCigNLHRMZCIfCemkL89jzp8IvMd5uK4shcfrMlCvAs8slnM3c5sc3s5L52zgqulz0SBkMacrZCgLPvR_a2BwNhv9hsbta8Xzf5dlhhpIRH6n_KNVVFD0a4vkbQJa6H3eHeD8Y-a7jeobcBDwtq63XPsvjVYeYd7YW7txoRyxzkLvo-nqRdaJQ13XvbkwXUOSMWrXhM-S85vaJGpZ4I5pkQiRPIHCxv9bwxxnvUEK6lNf-tpjZgiltxWiQzwQTjgabSy-lkBiYuNYhx_4M_iZAW5y1f8YfVknQhGNALKA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query team($team_id:ID!) {\n        team(id: $team_id) {\n          id,\n          name,\n          description,\n          business_id,\n          manager_id,\n        }\n      }",
+						"variables": "{\n    \"team_id\":\"54407273-eed4-4e5b-bceb-e2e6f733ae87\"\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4001/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Récupérer les équipes d'une entreprise",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImE1YTAwNWU5N2NiMWU0MjczMDBlNTJjZGQ1MGYwYjM2Y2Q4MDYyOWIiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiRmFpdGhnb3QiLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTF4NmNmdnZWdEsxQTNLOUhBVDF5ekZkSjZOa1BuSE9QS0pYR3N6cEVoRVBYYWlRPXM5Ni1jIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL3RpbWUtbWFuYWdlci1jZTg1MyIsImF1ZCI6InRpbWUtbWFuYWdlci1jZTg1MyIsImF1dGhfdGltZSI6MTc2MDM1MzYzMiwidXNlcl9pZCI6IlpnVExqaWo3TWFlN2dUN2lrb0luWHBWRVNUWTIiLCJzdWIiOiJaZ1RMamlqN01hZTdnVDdpa29JblhwVkVTVFkyIiwiaWF0IjoxNzYwMzUzNjMyLCJleHAiOjE3NjAzNTcyMzIsImVtYWlsIjoiZmFpdGhnb3QudGVjaEBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJnb29nbGUuY29tIjpbIjExMDU4NjI5ODg5MzgzMTg3MTAwMCJdLCJlbWFpbCI6WyJmYWl0aGdvdC50ZWNoQGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6Imdvb2dsZS5jb20ifX0.gv6ZczRfs9l9CFt6pWHCVVbJnBkOZNmq8RLLuYz5ObZEzwCigNLHRMZCIfCemkL89jzp8IvMd5uK4shcfrMlCvAs8slnM3c5sc3s5L52zgqulz0SBkMacrZCgLPvR_a2BwNhv9hsbta8Xzf5dlhhpIRH6n_KNVVFD0a4vkbQJa6H3eHeD8Y-a7jeobcBDwtq63XPsvjVYeYd7YW7txoRyxzkLvo-nqRdaJQ13XvbkwXUOSMWrXhM-S85vaJGpZ4I5pkQiRPIHCxv9bwxxnvUEK6lNf-tpjZgiltxWiQzwQTjgabSy-lkBiYuNYhx_4M_iZAW5y1f8YfVknQhGNALKA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query businessTeams($business_id:ID!) {\n        businessTeams(business_id: $business_id) {\n          id,\n          name,\n          description,\n          business_id,\n          manager_id,\n      }\n      }",
+						"variables": "{\n    \"business_id\":\"54407273-eed4-4e5b-bceb-e2e6f733ae87\"\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4001/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Récupérer les membres d'une équipe",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImE1YTAwNWU5N2NiMWU0MjczMDBlNTJjZGQ1MGYwYjM2Y2Q4MDYyOWIiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiRmFpdGhnb3QiLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTF4NmNmdnZWdEsxQTNLOUhBVDF5ekZkSjZOa1BuSE9QS0pYR3N6cEVoRVBYYWlRPXM5Ni1jIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL3RpbWUtbWFuYWdlci1jZTg1MyIsImF1ZCI6InRpbWUtbWFuYWdlci1jZTg1MyIsImF1dGhfdGltZSI6MTc2MDM1MzYzMiwidXNlcl9pZCI6IlpnVExqaWo3TWFlN2dUN2lrb0luWHBWRVNUWTIiLCJzdWIiOiJaZ1RMamlqN01hZTdnVDdpa29JblhwVkVTVFkyIiwiaWF0IjoxNzYwMzUzNjMyLCJleHAiOjE3NjAzNTcyMzIsImVtYWlsIjoiZmFpdGhnb3QudGVjaEBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJnb29nbGUuY29tIjpbIjExMDU4NjI5ODg5MzgzMTg3MTAwMCJdLCJlbWFpbCI6WyJmYWl0aGdvdC50ZWNoQGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6Imdvb2dsZS5jb20ifX0.gv6ZczRfs9l9CFt6pWHCVVbJnBkOZNmq8RLLuYz5ObZEzwCigNLHRMZCIfCemkL89jzp8IvMd5uK4shcfrMlCvAs8slnM3c5sc3s5L52zgqulz0SBkMacrZCgLPvR_a2BwNhv9hsbta8Xzf5dlhhpIRH6n_KNVVFD0a4vkbQJa6H3eHeD8Y-a7jeobcBDwtq63XPsvjVYeYd7YW7txoRyxzkLvo-nqRdaJQ13XvbkwXUOSMWrXhM-S85vaJGpZ4I5pkQiRPIHCxv9bwxxnvUEK6lNf-tpjZgiltxWiQzwQTjgabSy-lkBiYuNYhx_4M_iZAW5y1f8YfVknQhGNALKA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query teamMembers ($team_id:ID!) {\n        teamMembers(teamId: $team_id) {\n          id\n          email\n          first_name\n          last_name\n        }\n      }",
+						"variables": "{\n    \"team_id\":\"54407273-eed4-4e5b-bceb-e2e6f733ae87\"\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4001/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Récupérer toutes les équipes",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImE1YTAwNWU5N2NiMWU0MjczMDBlNTJjZGQ1MGYwYjM2Y2Q4MDYyOWIiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiRmFpdGhnb3QiLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTF4NmNmdnZWdEsxQTNLOUhBVDF5ekZkSjZOa1BuSE9QS0pYR3N6cEVoRVBYYWlRPXM5Ni1jIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL3RpbWUtbWFuYWdlci1jZTg1MyIsImF1ZCI6InRpbWUtbWFuYWdlci1jZTg1MyIsImF1dGhfdGltZSI6MTc2MDM1MzYzMiwidXNlcl9pZCI6IlpnVExqaWo3TWFlN2dUN2lrb0luWHBWRVNUWTIiLCJzdWIiOiJaZ1RMamlqN01hZTdnVDdpa29JblhwVkVTVFkyIiwiaWF0IjoxNzYwMzUzNjMyLCJleHAiOjE3NjAzNTcyMzIsImVtYWlsIjoiZmFpdGhnb3QudGVjaEBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJnb29nbGUuY29tIjpbIjExMDU4NjI5ODg5MzgzMTg3MTAwMCJdLCJlbWFpbCI6WyJmYWl0aGdvdC50ZWNoQGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6Imdvb2dsZS5jb20ifX0.gv6ZczRfs9l9CFt6pWHCVVbJnBkOZNmq8RLLuYz5ObZEzwCigNLHRMZCIfCemkL89jzp8IvMd5uK4shcfrMlCvAs8slnM3c5sc3s5L52zgqulz0SBkMacrZCgLPvR_a2BwNhv9hsbta8Xzf5dlhhpIRH6n_KNVVFD0a4vkbQJa6H3eHeD8Y-a7jeobcBDwtq63XPsvjVYeYd7YW7txoRyxzkLvo-nqRdaJQ13XvbkwXUOSMWrXhM-S85vaJGpZ4I5pkQiRPIHCxv9bwxxnvUEK6lNf-tpjZgiltxWiQzwQTjgabSy-lkBiYuNYhx_4M_iZAW5y1f8YfVknQhGNALKA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query {\n        teams {\n          id,\n          name,\n          description,\n          business_id,\n          manager_id,\n        }\n      }",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4001/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ajouter un membre à une équipe",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImE1YTAwNWU5N2NiMWU0MjczMDBlNTJjZGQ1MGYwYjM2Y2Q4MDYyOWIiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiRmFpdGhnb3QiLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTF4NmNmdnZWdEsxQTNLOUhBVDF5ekZkSjZOa1BuSE9QS0pYR3N6cEVoRVBYYWlRPXM5Ni1jIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL3RpbWUtbWFuYWdlci1jZTg1MyIsImF1ZCI6InRpbWUtbWFuYWdlci1jZTg1MyIsImF1dGhfdGltZSI6MTc2MDM1MzYzMiwidXNlcl9pZCI6IlpnVExqaWo3TWFlN2dUN2lrb0luWHBWRVNUWTIiLCJzdWIiOiJaZ1RMamlqN01hZTdnVDdpa29JblhwVkVTVFkyIiwiaWF0IjoxNzYwMzUzNjMyLCJleHAiOjE3NjAzNTcyMzIsImVtYWlsIjoiZmFpdGhnb3QudGVjaEBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJnb29nbGUuY29tIjpbIjExMDU4NjI5ODg5MzgzMTg3MTAwMCJdLCJlbWFpbCI6WyJmYWl0aGdvdC50ZWNoQGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6Imdvb2dsZS5jb20ifX0.gv6ZczRfs9l9CFt6pWHCVVbJnBkOZNmq8RLLuYz5ObZEzwCigNLHRMZCIfCemkL89jzp8IvMd5uK4shcfrMlCvAs8slnM3c5sc3s5L52zgqulz0SBkMacrZCgLPvR_a2BwNhv9hsbta8Xzf5dlhhpIRH6n_KNVVFD0a4vkbQJa6H3eHeD8Y-a7jeobcBDwtq63XPsvjVYeYd7YW7txoRyxzkLvo-nqRdaJQ13XvbkwXUOSMWrXhM-S85vaJGpZ4I5pkQiRPIHCxv9bwxxnvUEK6lNf-tpjZgiltxWiQzwQTjgabSy-lkBiYuNYhx_4M_iZAW5y1f8YfVknQhGNALKA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation addMemberToTeam ($team_id:ID!, $testTeamMember_id: ID!) {\n        addMemberToTeam(teamId: $team_id, userId: $testTeamMember_id) {\n          id\n          team_id\n          member_id\n        }\n      }",
+						"variables": "{\n    \"testTeamMember_id\": \"3530e9ab-431f-495c-b308-47956caf6be3\",\n    \"team_id\" : \"54407273-eed4-4e5b-bceb-e2e6f733ae87\"\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4001/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Supprimer un membre d'une équipe",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImE1YTAwNWU5N2NiMWU0MjczMDBlNTJjZGQ1MGYwYjM2Y2Q4MDYyOWIiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiRmFpdGhnb3QiLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTF4NmNmdnZWdEsxQTNLOUhBVDF5ekZkSjZOa1BuSE9QS0pYR3N6cEVoRVBYYWlRPXM5Ni1jIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL3RpbWUtbWFuYWdlci1jZTg1MyIsImF1ZCI6InRpbWUtbWFuYWdlci1jZTg1MyIsImF1dGhfdGltZSI6MTc2MDM1MzYzMiwidXNlcl9pZCI6IlpnVExqaWo3TWFlN2dUN2lrb0luWHBWRVNUWTIiLCJzdWIiOiJaZ1RMamlqN01hZTdnVDdpa29JblhwVkVTVFkyIiwiaWF0IjoxNzYwMzUzNjMyLCJleHAiOjE3NjAzNTcyMzIsImVtYWlsIjoiZmFpdGhnb3QudGVjaEBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJnb29nbGUuY29tIjpbIjExMDU4NjI5ODg5MzgzMTg3MTAwMCJdLCJlbWFpbCI6WyJmYWl0aGdvdC50ZWNoQGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6Imdvb2dsZS5jb20ifX0.gv6ZczRfs9l9CFt6pWHCVVbJnBkOZNmq8RLLuYz5ObZEzwCigNLHRMZCIfCemkL89jzp8IvMd5uK4shcfrMlCvAs8slnM3c5sc3s5L52zgqulz0SBkMacrZCgLPvR_a2BwNhv9hsbta8Xzf5dlhhpIRH6n_KNVVFD0a4vkbQJa6H3eHeD8Y-a7jeobcBDwtq63XPsvjVYeYd7YW7txoRyxzkLvo-nqRdaJQ13XvbkwXUOSMWrXhM-S85vaJGpZ4I5pkQiRPIHCxv9bwxxnvUEK6lNf-tpjZgiltxWiQzwQTjgabSy-lkBiYuNYhx_4M_iZAW5y1f8YfVknQhGNALKA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation removeMemberFromTeam ($team_id:ID!, $testTeamMember_id: ID!) {\n        removeMemberFromTeam(teamId: $team_id, userId: $testTeamMember_id)\n      }",
+						"variables": "{\n    \"testTeamMember_id\": \"3530e9ab-431f-495c-b308-47956caf6be3\",\n    \"team_id\" : \"54407273-eed4-4e5b-bceb-e2e6f733ae87\"\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4001/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Supprimer une équipe",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjdlYTA5ZDA1NzI2MmU2M2U2MmZmNzNmMDNlMDRhZDI5ZDg5Zjg5MmEiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiRmFpdGhnb3QiLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTF4NmNmdnZWdEsxQTNLOUhBVDF5ekZkSjZOa1BuSE9QS0pYR3N6cEVoRVBYYWlRPXM5Ni1jIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL3RpbWUtbWFuYWdlci1jZTg1MyIsImF1ZCI6InRpbWUtbWFuYWdlci1jZTg1MyIsImF1dGhfdGltZSI6MTc2MTY0MjI4NCwidXNlcl9pZCI6IlpnVExqaWo3TWFlN2dUN2lrb0luWHBWRVNUWTIiLCJzdWIiOiJaZ1RMamlqN01hZTdnVDdpa29JblhwVkVTVFkyIiwiaWF0IjoxNzYxNjQyMjg0LCJleHAiOjE3NjE2NDU4ODQsImVtYWlsIjoiZmFpdGhnb3QudGVjaEBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJnb29nbGUuY29tIjpbIjExMDU4NjI5ODg5MzgzMTg3MTAwMCJdLCJlbWFpbCI6WyJmYWl0aGdvdC50ZWNoQGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6Imdvb2dsZS5jb20ifX0.0i-L6eTqCtO_c5NvDo6-w7DzBkzIuVsQ5Dh-WjqrVB-WCY_-CcNL9diz-pnrHcYwvCtif71JcbzBe4khVqcrpKMN_R6z-3M8gn7jBjH-mzDJfXVQCvsjsJjl45iLLhvYdJHJXC2Ih88u1D5IFkhOUudE8-9DB4HcQbhAFfS_cgMg9ViDI8a8_1jyWeoIeJnNgJTN0o2LkD0MrEHU6biA9NfedF-vHzFAVJm0Y43F1vvTdosxRy_u0UyqoGVKxXdBYBO-UIfkzHdLlePKvEpZMhzy7r2B7_mGLZtIMa8Iunn60HudlZN-82WoB7NhORtpYW3TCeNg8CO15m7QCdMZCg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation deleteTeam($team_id: ID!) {\n    deleteTeam (id:$team_id) \n  }",
+						"variables": "{\n    \"team_id\": \"41c0bc6c-c7d8-4547-8a04-7630751d1b4b\"\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4001/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pointer à l'arrivée au bureau",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjdlYTA5ZDA1NzI2MmU2M2U2MmZmNzNmMDNlMDRhZDI5ZDg5Zjg5MmEiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiRmFpdGhnb3QiLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTF4NmNmdnZWdEsxQTNLOUhBVDF5ekZkSjZOa1BuSE9QS0pYR3N6cEVoRVBYYWlRPXM5Ni1jIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL3RpbWUtbWFuYWdlci1jZTg1MyIsImF1ZCI6InRpbWUtbWFuYWdlci1jZTg1MyIsImF1dGhfdGltZSI6MTc2MTU5NDY3NSwidXNlcl9pZCI6IlpnVExqaWo3TWFlN2dUN2lrb0luWHBWRVNUWTIiLCJzdWIiOiJaZ1RMamlqN01hZTdnVDdpa29JblhwVkVTVFkyIiwiaWF0IjoxNzYxNTk0Njc1LCJleHAiOjE3NjE1OTgyNzUsImVtYWlsIjoiZmFpdGhnb3QudGVjaEBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJnb29nbGUuY29tIjpbIjExMDU4NjI5ODg5MzgzMTg3MTAwMCJdLCJlbWFpbCI6WyJmYWl0aGdvdC50ZWNoQGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6Imdvb2dsZS5jb20ifX0.pnHjL_eNFtOK8BgG5y9h_e9vscvin49uXCidIthMolwJhTmF10S5jlqHe7sDawJEvej7LBechXQfftCS6iqBnAs2twKigrDcBVBVQHYipNXeCG7e2Zjiy37nA4BnWdJOg1BwQZfnQJjJs3wFiEUsCKFXt4O0lJO5PTNrwF0z6OyhIP4nFmdzkZYA8QXCc_2inxoUsILkJ1hM_72sJ2L2XrPmFY0YjHB_BeJWa_5Zp_d2myqU0Mdl9--MoShvo1gGZbhMvzcIAWnv2TTQi36FoqhE4ZKy4ZrZ5NQLNr7mO5TOKwEpDXdHIDHQgriVus7sPaNApaItVZw1dbYkDd_oqA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation setClock($employeeId : ID!,\n$date:String!,\n$start : String,\n$end : String\n$status:ClockStatus) {\n    setClock (employee_id:$employeeId,\ndate:$date,\nstart:$start,\nend:$end,\nstatus:$status) {\n    id\n    date       \n    start      \n    end        \n    employee_id\n    status   \n}\n}",
+						"variables": "{\n    \"employeeId\" : \"fe08c9de-91c1-4911-9869-0a47fe037760\",\n    \"date\" : \"2025-10-12T09:00:00.000Z\",\n    \"start\": \"2025-10-12T10:49:14.693Z\",\n    \"status\": \"on_time\"\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4001/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pointer au départ du bureau",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImE1YTAwNWU5N2NiMWU0MjczMDBlNTJjZGQ1MGYwYjM2Y2Q4MDYyOWIiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiZmFpdGhnb3QgbGV0b25zb3UgR0xJTi1EQVlJIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FDZzhvY0tqMDB2LXFYdENVSUZuNUl3amhsb1FWTHRyTWw2ZkJ2SE1KUTZxSi1kaDlWNDhRdz1zOTYtYyIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS90aW1lLW1hbmFnZXItY2U4NTMiLCJhdWQiOiJ0aW1lLW1hbmFnZXItY2U4NTMiLCJhdXRoX3RpbWUiOjE3NjAzOTA5ODksInVzZXJfaWQiOiJoTjZLT2pWWnFSUFNWd0c0MWdpWmtFcXNvTHUxIiwic3ViIjoiaE42S09qVlpxUlBTVndHNDFnaVprRXFzb0x1MSIsImlhdCI6MTc2MDM5MDk4OSwiZXhwIjoxNzYwMzk0NTg5LCJlbWFpbCI6ImZhaXRobGV0b25zb3VAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZ29vZ2xlLmNvbSI6WyIxMTQ1NDE0OTMzNzI3MDQ0MzY3NDEiXSwiZW1haWwiOlsiZmFpdGhsZXRvbnNvdUBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJnb29nbGUuY29tIn19.n7-RhjCZqXbKErYdVJfHUZXjYHKCXK4I0LFU2J-WUnIZ5gkQK6A8ge-YaJ6IYtlilfuerp9gTCYTcbXaoDE-O5P2FA3IsxlN5w65wXBV8C7svRFQLvXvjLD-xLweZc8CbzOVx6C-au8rupcXM7AGuoMJAQFBZgmN7e997GJhSkglowIPeZGzFFy3ldPmdIURsqIkIONf554Vwd_i7mG6BmlMXDw9HEdV0Mg7uBivq8jybeREnVQyr12az9sE7gNRVaA2GCUtU7J5GhoUWx5KDJt1qQ7CvpO0QRKwHFMhTYlbPcvNtF-HOhPU8493s1CERRmjQ5o-5d1lk_qZip5R7A",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation setClock($employeeId : ID!,\n$date:String!,\n$start : String,\n$end : String\n$status:ClockStatus) {\n    setClock (employee_id:$employeeId,\ndate:$date,\nstart:$start,\nend:$end,\nstatus:$status) {\n    id\n    date       \n    start      \n    end        \n    employee_id\n    status   \n}\n}",
+						"variables": "{\n    \"employeeId\" : \"8f966c9f-5b2c-4d64-8a58-a27ca2b451d1\",\n    \"date\" : \"2025-10-12T09:00:00.000Z\",\n    \"end\": \"2025-10-12T16:30:14.693Z\",\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4001/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Récupérer les pointages d'un employé",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjdlYTA5ZDA1NzI2MmU2M2U2MmZmNzNmMDNlMDRhZDI5ZDg5Zjg5MmEiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiRmFpdGhnb3QiLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTF4NmNmdnZWdEsxQTNLOUhBVDF5ekZkSjZOa1BuSE9QS0pYR3N6cEVoRVBYYWlRPXM5Ni1jIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL3RpbWUtbWFuYWdlci1jZTg1MyIsImF1ZCI6InRpbWUtbWFuYWdlci1jZTg1MyIsImF1dGhfdGltZSI6MTc2MTY1NjM2MSwidXNlcl9pZCI6IlpnVExqaWo3TWFlN2dUN2lrb0luWHBWRVNUWTIiLCJzdWIiOiJaZ1RMamlqN01hZTdnVDdpa29JblhwVkVTVFkyIiwiaWF0IjoxNzYxNjU2MzYxLCJleHAiOjE3NjE2NTk5NjEsImVtYWlsIjoiZmFpdGhnb3QudGVjaEBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJnb29nbGUuY29tIjpbIjExMDU4NjI5ODg5MzgzMTg3MTAwMCJdLCJlbWFpbCI6WyJmYWl0aGdvdC50ZWNoQGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6Imdvb2dsZS5jb20ifX0.YpeqSn-jrkdYzTNgIDoh4SI_Ng22tRv7yJGHwC-gr_0Dx9wBvTlqAXu1-aRmEtbVBucfOgNS-UR-ngos1JIZ__F0FJdSL3OzQzCAcaIWbjVimQq8lOw-rGIaHR_fYSCBiVLM_kO8ZYAU4H1XjXrFywDqiBbERiYR6KGkmoy75LZvF-YbSi7Whukfjnmtg-H-30eej22C463kRBJbuxV4QkHkZgbROirLuNqcSdgcPteWi5H6-eErTDu5Lmt__OB-D1YCwXlgX1VbxjFmSBKLsou0ENDQoXHIYVEPV_nTNL76f8r86b3dduWWpgPQ_uMNKTn6Co5fZo_sh9jBNLRyyg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($employeeId: ID!) {\n    employeeClockPointed (employee_id:$employeeId){\n        id,date,start,end,employee_id,status,created_at\n    }\n}",
+						"variables": "{\n    \"employeeId\":\"54407273-eed4-4e5b-bceb-e2e6f733ae87\"\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4001/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Récupérer les pointages d'un jour",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjdlYTA5ZDA1NzI2MmU2M2U2MmZmNzNmMDNlMDRhZDI5ZDg5Zjg5MmEiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiRmFpdGhnb3QiLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTF4NmNmdnZWdEsxQTNLOUhBVDF5ekZkSjZOa1BuSE9QS0pYR3N6cEVoRVBYYWlRPXM5Ni1jIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL3RpbWUtbWFuYWdlci1jZTg1MyIsImF1ZCI6InRpbWUtbWFuYWdlci1jZTg1MyIsImF1dGhfdGltZSI6MTc2MTY1NjM2MSwidXNlcl9pZCI6IlpnVExqaWo3TWFlN2dUN2lrb0luWHBWRVNUWTIiLCJzdWIiOiJaZ1RMamlqN01hZTdnVDdpa29JblhwVkVTVFkyIiwiaWF0IjoxNzYxNjU2MzYxLCJleHAiOjE3NjE2NTk5NjEsImVtYWlsIjoiZmFpdGhnb3QudGVjaEBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJnb29nbGUuY29tIjpbIjExMDU4NjI5ODg5MzgzMTg3MTAwMCJdLCJlbWFpbCI6WyJmYWl0aGdvdC50ZWNoQGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6Imdvb2dsZS5jb20ifX0.YpeqSn-jrkdYzTNgIDoh4SI_Ng22tRv7yJGHwC-gr_0Dx9wBvTlqAXu1-aRmEtbVBucfOgNS-UR-ngos1JIZ__F0FJdSL3OzQzCAcaIWbjVimQq8lOw-rGIaHR_fYSCBiVLM_kO8ZYAU4H1XjXrFywDqiBbERiYR6KGkmoy75LZvF-YbSi7Whukfjnmtg-H-30eej22C463kRBJbuxV4QkHkZgbROirLuNqcSdgcPteWi5H6-eErTDu5Lmt__OB-D1YCwXlgX1VbxjFmSBKLsou0ENDQoXHIYVEPV_nTNL76f8r86b3dduWWpgPQ_uMNKTn6Co5fZo_sh9jBNLRyyg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($date: String!, $employee_id: ID!) {\n   daylyReport (date: $date, employee_id: $employee_id) {\n    id,\n    date,\n    start,\n    end,\n    employee_id,\n    status,\n    created_at,\n    updated_at\n  }\n}",
+						"variables": "{\n    \"date\" : \"2025-10-12T09:00:00.000Z\",\n    \"employee_id\" : \"54407273-eed4-4e5b-bceb-e2e6f733ae87\"\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4001/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Récupérer les pointages d'une période",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImE1YTAwNWU5N2NiMWU0MjczMDBlNTJjZGQ1MGYwYjM2Y2Q4MDYyOWIiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiRmFpdGhnb3QiLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTF4NmNmdnZWdEsxQTNLOUhBVDF5ekZkSjZOa1BuSE9QS0pYR3N6cEVoRVBYYWlRPXM5Ni1jIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL3RpbWUtbWFuYWdlci1jZTg1MyIsImF1ZCI6InRpbWUtbWFuYWdlci1jZTg1MyIsImF1dGhfdGltZSI6MTc2MDQ0OTEyNSwidXNlcl9pZCI6IlpnVExqaWo3TWFlN2dUN2lrb0luWHBWRVNUWTIiLCJzdWIiOiJaZ1RMamlqN01hZTdnVDdpa29JblhwVkVTVFkyIiwiaWF0IjoxNzYwNDQ5MTI1LCJleHAiOjE3NjA0NTI3MjUsImVtYWlsIjoiZmFpdGhnb3QudGVjaEBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJnb29nbGUuY29tIjpbIjExMDU4NjI5ODg5MzgzMTg3MTAwMCJdLCJlbWFpbCI6WyJmYWl0aGdvdC50ZWNoQGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6Imdvb2dsZS5jb20ifX0.cH4Fuou_5-rb4tiWV70zHe2_L-ZkRum47sz8BQ7Mi6d6x_TpPYq2lRZZnSjxrzpAvXOAr5VCmAFaHbk3opNFrkeTXwZjZj3DmwVloBMMBI7lROxcdJoBLYkf7yK2ccO_9PQg97afmsLbPfUzySFcyVJoOpS_vJQurRZpKhDU29uMuIV9Ps1N-s-bNluoUbwS7v95epiPGNJlIX7YRyR29nu8QFvkym5sfgyhElvo5zNhMl1ndRnscT3uown5VO9JBakxX8HsNIRCxN8xFwZCcQTLRWJYCEV3VPDyxb-lmQKhItnsCE1c825tTO-S6wiok17eEn-_7U-YEaTcgmcVsQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($start_date: String!, $end_date: String!, $employee_id: ID!) {\n   reportByPeriod (start_date: $start_date,end_date:$end_date, employee_id: $employee_id) {\n    id,\n    date,\n    start,\n    end,\n    employee_id,\n    status,\n    created_at,\n    updated_at\n  }\n}",
+						"variables": "{\n    \"start_date\" : \"2025-10-12T09:00:00.000Z\",\n    \"end_date\" : \"2025-12-12T09:00:00.000Z\",\n    \"employee_id\" : \"569fcbd0-590b-40ab-9ce3-dc3a150bcf45\"\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4001/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
